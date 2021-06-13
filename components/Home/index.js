@@ -1,3 +1,28 @@
+import Typewriter from 'typewriter-effect';
+
+
+function ProductHeading() {
+    const texts = ['Within minutes', 'Without the hassle', 'Without the knowhow'];
+    
+    return (
+        <h1 className="text-5xl font-extrabold leading-10 tracking-tight text-left text-gray-900 md:text-center sm:leading-none md:text-6xl lg:text-7xl">
+            <span className="inline mb-2 md:block">Deploy your next Blockchain Node</span>
+            <Typewriter
+                className=""
+                options={{
+                    skipAddStyles: true,
+                    wrapperClassName: 'relative text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-red-400 md:inline-block',
+                    cursorClassName: 'hidden',
+                    strings: texts,
+                    autoStart: true,
+                    loop: true,
+                    deleteSpeed: 20,
+                }}
+            />
+        </h1>
+    )
+}
+
 function Home() {
     return (
         <div>
@@ -41,12 +66,7 @@ function Home() {
                     </nav>
 
                     <div className="container max-w-lg px-4 py-32 mx-auto text-left md:max-w-none md:text-center">
-                        <h1 className="text-5xl font-extrabold leading-10 tracking-tight text-left text-gray-900 md:text-center sm:leading-none md:text-6xl lg:text-7xl">
-                            <span className="inline md:block">Deploy your next Blockchain Node</span>
-                            {/* <span className="relative mt-2 text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-red-400 md:inline-block">Within minutes</span> */}
-                            <span className="relative mt-2 text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-red-400 md:inline-block">Without the knowhow</span>
-                            {/* <span className="relative mt-2 text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-red-400 md:inline-block">Without hassle</span> */}
-                        </h1>
+                        <ProductHeading />
                         <div className="mx-auto mt-5 text-gray-500 md:mt-12 md:max-w-lg md:text-center lg:text-lg">
                             Simplifying
                             <span className="bg-gray-200 text-gray-600 rounded-lg ml-1 px-2 py-px">creation</span>
