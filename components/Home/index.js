@@ -46,13 +46,13 @@ function Home() {
                                 <div className="flex-col w-full h-auto overflow-hidden bg-white rounded-lg md:bg-transparent md:overflow-visible md:rounded-none md:relative md:flex md:flex-row">
                                     <a href="#_" className="inline-flex items-center block w-auto h-16 px-6 text-xl font-black leading-none text-gray-900 md:hidden">tails<span className="text-red-500">.</span></a>
                                     <div className="flex flex-col items-start justify-center w-full space-x-6 text-center lg:space-x-8 md:w-2/3 md:mt-0 md:flex-row md:items-center">
-                                        <a href="#_" className="inline-block w-full py-2 mx-0 ml-6 font-medium text-left text-red-500 md:ml-0 md:w-auto md:px-0 md:mx-2 lg:mx-3 md:text-center">Home</a>
-                                        <a href="#_" className="inline-block w-full py-2 mx-0 font-medium text-left text-gray-700 md:w-auto md:px-0 md:mx-2 hover:text-red-500 lg:mx-3 md:text-center">Features</a>
-                                        <a href="#_" className="inline-block w-full py-2 mx-0 font-medium text-left text-gray-700 md:w-auto md:px-0 md:mx-2 hover:text-red-500 lg:mx-3 md:text-center">Blog</a>
-                                        <a href="#_" className="inline-block w-full py-2 mx-0 font-medium text-left text-gray-700 md:w-auto md:px-0 md:mx-2 hover:text-red-500 lg:mx-3 md:text-center">Contact</a>
-                                        <a href="#_" className="absolute top-0 left-0 hidden py-2 mt-6 ml-10 mr-2 text-gray-600 lg:inline-block md:mt-0 md:ml-2 lg:mx-3 md:relative">
+                                        <a href="#" className="inline-block w-full py-2 mx-0 ml-6 font-medium text-left text-red-500 md:ml-0 md:w-auto md:px-0 md:mx-2 lg:mx-3 md:text-center">Home</a>
+                                        <a href="#features" className="inline-block w-full py-2 mx-0 font-medium text-left text-gray-700 md:w-auto md:px-0 md:mx-2 hover:text-red-500 lg:mx-3 md:text-center">Features</a>
+                                        <a href="#providers" className="inline-block w-full py-2 mx-0 font-medium text-left text-gray-700 md:w-auto md:px-0 md:mx-2 hover:text-red-500 lg:mx-3 md:text-center">Providers</a>
+                                        <a href="#chains" className="inline-block w-full py-2 mx-0 font-medium text-left text-gray-700 md:w-auto md:px-0 md:mx-2 hover:text-red-500 lg:mx-3 md:text-center">Supported Chains</a>
+                                        {/* <a hidden href="#_" className="absolute top-0 left-0 hidden py-2 mt-6 ml-10 mr-2 text-gray-600 lg:inline-block md:mt-0 md:ml-2 lg:mx-3 md:relative">
                                             <svg className="inline w-5 h-5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                        </a>
+                                        </a> */}
                                     </div>
                                     <div className="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0">
                                         <a href="#" className="w-full px-6 py-2 mr-0 text-gray-700 md:px-0 lg:pl-2 md:mr-4 lg:mr-5 md:w-auto">Sign In</a>
@@ -91,7 +91,7 @@ function Home() {
                 </div>
             </section>
 
-            <section className="py-20 bg-gray-50">
+            <section className="py-20 bg-gray-50" id="features">
                 <div className="container items-center max-w-6xl px-4 px-10 mx-auto sm:px-20 md:px-32 lg:px-16">
                     <div className="flex flex-wrap items-center -mx-3">
                     <div className="order-1 w-full px-3 lg:w-1/2 lg:order-0">
@@ -127,7 +127,7 @@ function Home() {
                 </div>
             </section>
 
-            <section className="py-20 bg-white">
+            <section className="py-32 bg-white">
                 <div className="container max-w-6xl mx-auto">
                     <h2 className="text-4xl font-bold tracking-tight text-center">Our Features</h2>
                     <p className="mt-2 text-lg text-center text-gray-600">Your one stop solution to all your blockchain mining/validating business needs</p>
@@ -137,8 +137,8 @@ function Home() {
                             <div className="p-3 text-white bg-red-500 rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 " viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M5 8v-3a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5"></path><circle cx="6" cy="14" r="3"></circle><path d="M4.5 17l-1.5 5l3 -1.5l3 1.5l-1.5 -5"></path></svg>
                             </div>
-                            <h4 className="text-xl font-medium text-gray-700">Backed by Top-Providers</h4>
-                            <p className="text-base text-center text-gray-500">Get SLAs from top providers, choose any which you trust</p>
+                            <h4 className="text-xl font-medium text-gray-700">Backed by Top Cloud Providers</h4>
+                            <p className="text-base text-center text-gray-500">Get SLAs uptime guarantees from top providers, choose the one you trust</p>
                         </div>
 
                         <div className="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
@@ -184,15 +184,15 @@ function Home() {
                 </div>
             </section>
 
-            <section className="leading-7 text-gray-900 bg-white flex">
+            <section className="leading-7 text-gray-900 bg-white flex" id="providers">
                 <div className="container max-w-6xl mx-auto lg:py-24 px-3 border-t border-gray-200">
-                    <h2 className="text-4xl font-bold tracking-tight text-center">Backed by top providers</h2>
+                    <h2 className="text-4xl font-bold tracking-tight text-center">Backed by top cloud providers</h2>
                     <p className="mt-2 text-lg text-center text-gray-600">We support one-click deployment to any of these providers</p>
                     <div className="flex justify-center"><img className="sm:w-1/2" src="https://miro.medium.com/max/3222/1*go7sTFOGN2fJGgYrI3E-FA.png" alt="" /></div>
                 </div>
             </section>
 
-            <section className="py-20 bg-gray-50">
+            <section className="py-20 bg-gray-50" id="chains">
                 <div className="container items-center max-w-6xl px-4 px-10 mx-auto sm:px-16 md:px-32 lg:px-10">
                     <div className="flex flex-wrap items-center -mx-3">
                         <div className="w-full px-3 lg:w-1/2">
