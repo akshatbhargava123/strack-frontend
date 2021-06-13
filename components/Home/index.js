@@ -1,6 +1,12 @@
 import Typewriter from 'typewriter-effect';
 
 
+function Logo({ className }) {
+    return (
+        <span className={`p-1 text-xl font-black leading-none text-gray-900 ${className || ''}`}><span>Strack</span><span className="text-red-500">.</span></span>
+    )
+}
+
 function ProductHeading() {
     const texts = ['Within minutes', 'Without the hassle', 'Without the knowhow'];
     
@@ -33,7 +39,7 @@ function Home() {
                         <div className="container relative flex flex-wrap items-center justify-between h-24 mx-auto overflow-hidden font-medium border-b border-gray-200 md:overflow-visible lg:justify-center sm:px-4 md:px-2">
                             <div className="flex items-center justify-start w-1/4 h-full pr-4">
                                 <a href="#_" className="inline-block py-4 md:py-0">
-                                    <span className="p-1 text-xl font-black leading-none text-gray-900"><span>Strack</span><span className="text-red-500">.</span></span>
+                                    <Logo />
                                 </a>
                             </div>
                             <div className="top-0 left-0 items-start hidden w-full h-full p-4 text-sm bg-gray-900 bg-opacity-50 md:items-center md:w-3/4 md:absolute lg:text-base md:bg-transparent md:p-0 md:relative md:flex">
@@ -178,8 +184,8 @@ function Home() {
                 </div>
             </section>
 
-            <section className="py-8 leading-7 text-gray-900 bg-white sm:py-12 md:py-16 flex">
-                <div className="container max-w-6xl mx-auto lg:py-24 px-3 border-b border-t border-gray-200">
+            <section className="leading-7 text-gray-900 bg-white flex">
+                <div className="container max-w-6xl mx-auto lg:py-24 px-3 border-t border-gray-200">
                     <h2 className="text-4xl font-bold tracking-tight text-center">Backed by top providers</h2>
                     <p className="mt-2 text-lg text-center text-gray-600">We support one-click deployment to any of these providers</p>
                     <div className="flex justify-center"><img className="sm:w-1/2" src="https://miro.medium.com/max/3222/1*go7sTFOGN2fJGgYrI3E-FA.png" alt="" /></div>
@@ -223,6 +229,54 @@ function Home() {
                             </svg>
                         </a>
                     </div>
+                </div>
+            </section>
+
+            <section className="bg-white">
+                <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
+                    <nav className="flex flex-wrap justify-center -mx-5 -my-2">
+                        {/* <div className="px-5 py-2">
+                            <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                                About
+                            </a>
+                        </div>
+                        <div className="px-5 py-2">
+                            <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                                Blog
+                            </a>
+                        </div>
+                        <div className="px-5 py-2">
+                            <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                                Team
+                            </a>
+                        </div>
+                        <div className="px-5 py-2">
+                            <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                                Pricing
+                            </a>
+                        </div>
+                        <div className="px-5 py-2">
+                            <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                                Contact
+                            </a>
+                        </div>
+                        <div className="px-5 py-2">
+                            <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                                Terms
+                            </a>
+                        </div> */}
+                    </nav>
+                    <div className="flex justify-center mt-8 space-x-6">
+                        <a href="#" className="text-gray-400 hover:text-gray-500">
+                            <span className="sr-only">GitHub</span>
+                            <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <span className="mt-8 text-base leading-6 text-center text-gray-400 flex justify-center flex-wrap">
+                        Built with <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mt-px mx-1 text-red-500" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" /></svg>by team <Logo className="relative -top-px" /> at SyntropyStack hackathon
+                    </span>
                 </div>
             </section>
 
