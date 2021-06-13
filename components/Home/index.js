@@ -179,14 +179,30 @@ function Home() {
             </section>
 
             <section className="py-8 leading-7 text-gray-900 bg-white sm:py-12 md:py-16 flex">
-                <div className="container max-w-6xl mx-auto lg:py-24 px-3">
+                <div className="container max-w-6xl mx-auto lg:py-24 px-3 border-b border-t border-gray-200">
                     <h2 className="text-4xl font-bold tracking-tight text-center">Backed by top providers</h2>
                     <p className="mt-2 text-lg text-center text-gray-600">We support one-click deployment to any of these providers</p>
                     <div className="flex justify-center"><img className="sm:w-1/2" src="https://miro.medium.com/max/3222/1*go7sTFOGN2fJGgYrI3E-FA.png" alt="" /></div>
                 </div>
             </section>
 
-            <div className="border-b border-gray-300"></div>
+            <section className="py-20 bg-gray-50">
+                <div className="container items-center max-w-6xl px-4 px-10 mx-auto sm:px-16 md:px-32 lg:px-10">
+                    <div className="flex flex-wrap items-center -mx-3">
+                        <div className="w-full px-3 lg:w-1/2">
+                            <div className="w-full lg:max-w-md">
+                            <h2 className="mb-4 text-3xl font-bold leading-tight tracking-tight sm:text-3xl font-heading">Supports multiple blockchains</h2>
+                            <p className="mb-4 font-medium tracking-tight text-gray-400 xl:mb-6">and many more to come if you show us some support</p>
+                            </div>
+                        </div>
+                        <div className="w-full px-3 mb-12 lg:w-1/2 lg:mb-0 flex ">
+                            <img className="mx-auto" width="100px" src="https://originem.it/wp-content/uploads/2019/01/ethlogo.png" alt="feature image" />
+                            <img className="mx-auto" width="100px" src="https://i2.wp.com/dexplain.com/wp-content/uploads/2020/08/image-15.png?resize=200%2C200&ssl=1" alt="feature image" />
+                            <img className="mx-auto" width="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/BTC_Logo.svg/183px-BTC_Logo.svg.png" alt="feature image" />
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <section className="py-8 leading-7 text-gray-900 bg-white sm:py-12 md:py-16 lg:py-24">
                 <div className="max-w-6xl px-4 px-10 mx-auto border-solid lg:px-12">
