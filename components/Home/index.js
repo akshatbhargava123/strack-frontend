@@ -35,7 +35,7 @@ function Home() {
     
     return (
         <div>
-            <section className="w-full px-6 pb-12 antialiased bg-white">
+            <section className="w-full px-6 pb-12 antialiased bg-white" onClick={() => setMenuOpen(false)}>
                 <div className="mx-auto max-w-7xl">
 
                     <nav className="relative z-50 h-24 select-none">
@@ -65,7 +65,13 @@ function Home() {
                             </div>
                             <div className="absolute right-0 flex flex-col items-center items-end justify-center w-10 h-10 bg-white rounded-full cursor-pointer md:hidden hover:bg-gray-100">
                                 {!menuOpen ? (
-                                    <svg onClick={() => setMenuOpen(true)} className="w-6 h-6 text-gray-700" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg
+                                        onClick={(ev) => {
+                                            setMenuOpen(true);
+                                            ev.stopPropagation();
+                                        }}
+                                        className="w-6 h-6 text-gray-700" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" stroke="currentColor"
+                                    >
                                         <path d="M4 6h16M4 12h16M4 18h16"></path>
                                     </svg>
                                 ) : (
