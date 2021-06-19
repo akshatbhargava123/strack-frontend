@@ -34,18 +34,41 @@ function PlatformSelector({ setProvider }) {
     )
 }
 
+function ProviderLocationSelector() {
+    return (
+        <div>
+
+        </div>
+    )
+}
+
+const Steps = {
+    NODE_NAME: {
+        label: 'node-name',
+        next: 'PROVIDER_SELECTION',
+        prev: null,
+    },
+    PROVIDER_SELECTION: {
+        label: 'provider-selection',
+        next: null,
+        prev: 'NODE_NAME',
+    },
+};
+
 function CreateNodeModal({ isOpen, onClose }) {
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(Steps.NODE_NAME);
     const [name, setName] = useState('');
     const [provider, setProvider] = useState();
     
     const shouldDisableCTA = () => {
-        if (step === 1) return !!!name.trim().length;
-        if (step === 2) return isNaN(Number(provider));
-    };
-
-    const updateStep = (delta) => {
-        setStep(Math.max(0, step + delta));
+        switch (step.label) {
+            case Steps.NODE_NAME.label:
+                return !!!name.trim().length;
+            case Steps.PROVIDER_SELECTION.label:
+               return isNaN(Number(provider));
+            default:
+                return false;
+        }
     };
 
     return (
@@ -56,14 +79,14 @@ function CreateNodeModal({ isOpen, onClose }) {
                     <span className="text-2xl text-red-500 font-extrabold">Instantiate a new Node</span>
                 </ModalHeader>
                 <ModalBody>
-                    {step === 1 && (
+                    {step.label === Steps.NODE_NAME.label && (
                         <div>
                             <h3 className="mb-4 text-lg text-gray-800 font-semibold">Give your node a name (or nickname if you'd like)</h3>
                             <Input width="96" fontWeight="semibold" value={name} onChange={ev => setName(ev.target.value)} />
                         </div>
                     )}
 
-                    {step === 2 && (
+                    {step.label === Steps.PROVIDER_SELECTION.label && (
                         <div>
                             <h3 className="text-lg text-gray-800 font-semibold flex items-center">
                                 <span className="mr-2">Choose the service provider</span>
@@ -75,14 +98,8 @@ function CreateNodeModal({ isOpen, onClose }) {
                             </h3>
                             <div className="py-8">
                                 <PlatformSelector setProvider={setProvider} />
+                                <ProviderLocationSelector />
                             </div>
-                        </div>
-                    )}
-
-                    {step === 3 && (
-                        <div>
-                            <h3 className="mb-4 text-lg text-gray-800 font-semibold">Give your node a name (or nickname if you'd like)</h3>
-                            <Input width="96" fontWeight="semibold" />
                         </div>
                     )}
                 </ModalBody>
@@ -91,8 +108,8 @@ function CreateNodeModal({ isOpen, onClose }) {
                     <div className="w-full flex items-center justify-between">
                         <Button
                             variant="outline"
-                            disabled={step === 1}
-                            onClick={() => updateStep(-1)}
+                            disabled={!step.prev}
+                            onClick={() => setStep(Steps[step.prev])}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -103,9 +120,11 @@ function CreateNodeModal({ isOpen, onClose }) {
                             mr={3}
                             colorScheme="red"
                             disabled={shouldDisableCTA()}
-                            onClick={() => updateStep(1)}
+                            onClick={() => setStep(Steps[step.next])}
+                            transition="all"
+                            transitionDuration={500}
                         >
-                            Next
+                            {step.next ? 'Next' : 'Finish'}
                             <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
