@@ -20,7 +20,7 @@ function Header({ user, loading }) {
         <nav className="relative z-50 select-none shadow">
             <div className="flex items-center justify-between w-full h-20 px-10">
                 <div><Logo /></div>
-                <div className="hover:text-red-500 cursor-pointer" onClick={firebase.auth().signOut}>Logout</div>
+                <div className="hover:text-red-500 cursor-pointer" onClick={() => firebase.auth().signOut()}>Logout</div>
             </div>
         </nav>
     )
@@ -33,6 +33,10 @@ function Dashboard() {
     const [nodesLoading, setNodesLoading] = useState(false);
 
     useEffect(() => {
+        if (user) fetchNodes();
+    }, [user]);
+
+    const fetchNodes = () => {
         setNodesLoading(true);
         axios.get('/node').then(res => {
             const nodes = res.data.data;
@@ -43,8 +47,8 @@ function Dashboard() {
                 setNodesLoading(false);
             }, 1000);
         });
-    }, []);
-
+    };
+    
     const onCreateNode = (name, nodeType, provider, location = 'unknown') => {
         return axios.post('/node', {
             name,
