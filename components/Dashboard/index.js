@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/dist/client/router';
+import NodeTable from './NodeTable';
 
 function Header({ user, loading }) {
     const router = useRouter();
@@ -28,7 +29,7 @@ function Dashboard() {
     return (
         <div>
             <Header user={user} loading={authLoading} />
-            <div className="w-full mx-auto m-10 max-w-4xl">
+            <div className="w-full mx-auto m-10 p-2 max-w-4xl">
                 <div className="flex items-start justify-end">
                     {/* <h1 className="font-semibold"></h1> */}
                     <button className="bg-red-500 hover:bg-opacity-80 text-white px-4 py-2 rounded-lg font-semibold flex items-center">
@@ -39,8 +40,8 @@ function Dashboard() {
                     </button>
                 </div>
 
-                <div>
-                    
+                <div className="">
+                    <NodeTable />
                 </div>
             </div>
         </div>
