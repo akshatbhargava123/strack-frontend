@@ -106,9 +106,9 @@ function Home() {
                             <span className="bg-gray-200 text-gray-600 rounded-lg ml-1 px-2 py-px">security</span> and <span className="bg-gray-200 text-gray-600 rounded-lg ml-1 px-2 py-px">management</span> for your blockchain business needs</div>
                         <div className="flex flex-col items-center mt-12 text-center">
                             <span className="relative inline-flex w-full md:w-auto">
-                                <a href="#_" type="button" className="inline-flex items-center justify-center w-full px-8 py-4 text-base font-bold leading-6 text-white bg-red-500 border border-transparent rounded-full md:w-auto hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                <button onClick={signInWithGoogle} type="button" className="inline-flex items-center justify-center w-full px-8 py-4 text-base font-bold leading-6 text-white bg-red-500 border border-transparent rounded-full md:w-auto hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                                     Deploy now
-                                </a>
+                                </button>
                                 <span className="absolute top-0 right-0 px-2 py-1 -mt-3 -mr-6 text-xs font-medium leading-tight text-white bg-green-400 rounded-full">{'free trial' || 'only $15/hr'}</span>
                             </span>
                             <a href="#features" className="mt-3 text-sm text-red-500">Learn More</a>
@@ -156,7 +156,7 @@ function Home() {
             <section className="py-32 bg-white">
                 <div className="container max-w-6xl mx-auto">
                     <h2 className="text-4xl font-bold tracking-tight text-center">Our Features</h2>
-                    <p className="mt-2 text-lg text-center text-gray-600">Your one stop solution to all your blockchain mining/validating business needs</p>
+                    <p className="mt-2 text-lg text-center text-gray-600">Your one stop solution to all your blockchain business needs</p>
                     <div className="grid grid-cols-4 gap-8 mt-10 sm:grid-cols-8 lg:grid-cols-12 sm:px-8 xl:px-0">
 
                         <div className="relative flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 overflow-hidden bg-gray-100 sm:rounded-xl">
@@ -214,7 +214,7 @@ function Home() {
                 <div className="container max-w-6xl mx-auto lg:py-24 px-3 border-t border-gray-200">
                     <h2 className="text-4xl font-bold tracking-tight text-center">Backed by top cloud providers</h2>
                     <p className="mt-2 text-lg text-center text-gray-600">We support one-click deployment to any of these providers</p>
-                    <div className="flex justify-center"><img className="sm:w-1/2" src="https://miro.medium.com/max/3222/1*go7sTFOGN2fJGgYrI3E-FA.png" alt="" /></div>
+                    <div className="flex justify-center"><img className="sm:w-1/2" src="/images/available-providers-min.png" alt="" /></div>
                 </div>
             </section>
 
@@ -228,9 +228,9 @@ function Home() {
                             </div>
                         </div>
                         <div className="w-full px-3 mb-12 lg:w-1/2 lg:mb-0 flex ">
-                            <img className="mx-auto" width="100px" src="https://originem.it/wp-content/uploads/2019/01/ethlogo.png" alt="feature image" />
-                            <img className="mx-auto" width="100px" src="https://i2.wp.com/dexplain.com/wp-content/uploads/2020/08/image-15.png?resize=200%2C200&ssl=1" alt="feature image" />
-                            <img className="mx-auto" width="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/BTC_Logo.svg/183px-BTC_Logo.svg.png" alt="feature image" />
+                            <img className="mx-auto" width="100px" src="/images/ethereum-logo-min.png" alt="feature image" />
+                            <img className="mx-auto" width="100px" src="/images/elrond-logo-min.png" alt="feature image" />
+                            <img className="mx-auto" width="100px" src="/images/bitcoin-logo-min.png" alt="feature image" />
                         </div>
                     </div>
                 </div>
