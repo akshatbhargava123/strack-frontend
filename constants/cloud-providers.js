@@ -10,7 +10,7 @@ export const CloudProviders = [
         imageSrc: '/images/gcp-logo-min.png',
     },
     {
-        id: 0,
+        id: 2,
         name: 'MA',
         imageSrc: '/images/azure-logo-min.png',
     },
