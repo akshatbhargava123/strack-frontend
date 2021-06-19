@@ -1,4 +1,4 @@
-import { useDisclosure } from '@chakra-ui/react';
+import { Spinner, useDisclosure } from '@chakra-ui/react';
 import Logo from '@components/common/Logo';
 import { noop } from 'lodash';
 import { useEffect, useState } from 'react';
@@ -27,8 +27,23 @@ function Header({ user, loading }) {
 }
 
 function Dashboard() {
-    const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
+    const { isOpen, onToggle } = useDisclosure();
     const [user, authLoading, error] = useAuthState(firebase.auth());
+    const [nodes, setNodes] = useState([]);
+    const [nodesLoading, setNodesLoading] = useState(false);
+
+    useEffect(() => {
+        setNodesLoading(true);
+        axios.get('/node').then(res => {
+            const nodes = res.data.data;
+            console.log(nodes);
+
+            setTimeout(() => {
+                setNodes(nodes);
+                setNodesLoading(false);
+            }, 1000);
+        });
+    }, []);
 
     const onCreateNode = (name, nodeType, provider, location = 'unknown') => {
         return axios.post('/node', {
@@ -54,10 +69,18 @@ function Dashboard() {
                 </div>
 
                 <div className="">
-                    <NodeTable />
+                    {nodesLoading ? (
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="mt-2"><Spinner color="red" /></div>
+                            <p className="text-gray-500">Fetching your nodes</p>
+                        </div>
+                    ) : (
+                        <NodeTable nodes={nodes} />
+                    )}
                 </div>
             </div>
-            
+
+
             <CreatedNodeModal isOpen={isOpen} onClose={onToggle} onCreateNode={onCreateNode} />
         </div>
     )
