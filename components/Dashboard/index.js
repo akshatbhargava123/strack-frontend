@@ -7,6 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/dist/client/router';
 import NodeTable from './NodeTable';
 import CreatedNodeModal from './CreateNodeModal';
+import axios from '@lib/axios';
 
 function Header({ user, loading }) {
     const router = useRouter();
@@ -29,6 +30,15 @@ function Dashboard() {
     const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
     const [user, authLoading, error] = useAuthState(firebase.auth());
 
+    const onCreateNode = (name, nodeType, provider, location = 'unknown') => {
+        return axios.post('/node', {
+            name,
+            type: nodeType,
+            datacenter: provider,
+            location,
+        });
+    };
+
     return (
         <div>
             <Header user={user} loading={authLoading} />
@@ -48,7 +58,7 @@ function Dashboard() {
                 </div>
             </div>
             
-            <CreatedNodeModal isOpen={isOpen} onClose={onToggle} />
+            <CreatedNodeModal isOpen={isOpen} onClose={onToggle} onCreateNode={onCreateNode} />
         </div>
     )
 }
