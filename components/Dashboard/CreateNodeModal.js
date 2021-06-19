@@ -13,42 +13,37 @@ import { useEffect, useState } from "react";
 import { CloudProviders } from '@constants/cloud-providers';
 import { NodeTypes } from '@constants/node-types';
 
-function PlatformSelector({ setProvider }) {
-    const [selected, setSelected] = useState();
-
-    useEffect(() => {
-        setProvider(selected);
-    }, [selected]);
-
+function PlatformSelector({ selected, setProvider }) {
     return (
         <div className="flex flex-wrap space-x-2">
             {CloudProviders.map(provider => (
                 <div
                     key={provider.id}
-                    className={`p-2 transition-all duration-200 shadow-lg cursor-pointer rounded ${selected === provider.id ? 'ring-2 ring-red-300 bg-red-50' : 'ring-1 ring-gray-200 opacity-80'}`}
-                    onClick={() => setSelected(provider.id)}
+                    className={`relative p-2 transition-all duration-200 shadow-lg cursor-pointer rounded ${selected === provider.id ? 'ring-2 ring-red-300 bg-red-50' : 'ring-1 ring-gray-200 opacity-80'}`}
+                    onClick={() => setProvider(provider.id)}
                 >
                     <img width={180} height={180} src={provider.imageSrc} alt="aws" />
+                    {selected === provider.id && (
+                        <div className="absolute top-2 right-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                        </div>
+                    )}
                 </div>
             ))}
         </div>
     )
 }
 
-function NodeSelector({ setNodeType }) {
-    const [selected, setSelected] = useState();
-
-    useEffect(() => {
-        setNodeType(selected);
-    }, [selected]);
-    
+function NodeSelector({ selected, setNodeType }) {
     return (
         <div className="flex flex-wrap space-x-2">
             {NodeTypes.map(nodeType => (
                 <div
                     key={nodeType.id}
                     className={`p-2 relative transition-all duration-200 shadow-lg cursor-pointer rounded ${selected === nodeType.id ? 'ring-2 ring-red-300 bg-red-50' : 'ring-1 ring-gray-200 opacity-60'}`}
-                    onClick={() => setSelected(nodeType.id)}
+                    onClick={() => setNodeType(nodeType.id)}
                 >
                     <img width={180} height={180} src={nodeType.imageSrc} alt="aws" />
                     <p className="mt-3 text-center font-semibold">{nodeType.name}</p>
@@ -109,7 +104,7 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
     };
 
     return (
-        <Modal size="2xl" isOpen={isOpen} onClose={onClose}>
+        <Modal motionPreset="slideInBottom" size="2xl" isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader>
@@ -134,7 +129,7 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
                                 </Tooltip>
                             </h3>
                             <div className="py-8">
-                                <PlatformSelector setProvider={setProvider} />
+                                <PlatformSelector selected={provider} setProvider={setProvider} />
                                 <ProviderLocationSelector />
                             </div>
                         </div>
@@ -146,7 +141,7 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
                                 <span className="mr-2">Which type of node would you like to deploy?</span>
                             </h3>
                             <div className="py-8">
-                                <NodeSelector setNodeType={setNodeType} />
+                                <NodeSelector selected={nodeType} setNodeType={setNodeType} />
                             </div>
                         </div>
                     )}
@@ -168,7 +163,7 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
                             mr={3}
                             colorScheme="red"
                             disabled={shouldDisableCTA()}
-                            onClick={() => step.next ? setStep(Steps[step.next]) : onCreateNode(name, provider)}
+                            onClick={() => step.next ? setStep(Steps[step.next]) : onCreateNode(name, nodeType, provider)}
                             transition="all"
                             transitionDuration={500}
                         >
