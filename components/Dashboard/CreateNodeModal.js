@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { CloudProviders } from '@constants/cloud-providers';
+import { NodeTypes } from '@constants/node-types';
 
 function PlatformSelector({ setProvider }) {
     const [selected, setSelected] = useState();
@@ -34,6 +35,36 @@ function PlatformSelector({ setProvider }) {
     )
 }
 
+function NodeSelector({ setNodeType }) {
+    const [selected, setSelected] = useState();
+
+    useEffect(() => {
+        setNodeType(selected);
+    }, [selected]);
+    
+    return (
+        <div className="flex flex-wrap space-x-2">
+            {NodeTypes.map(nodeType => (
+                <div
+                    key={nodeType.id}
+                    className={`p-2 relative transition-all duration-200 shadow-lg cursor-pointer rounded ${selected === nodeType.id ? 'ring-2 ring-red-300 bg-red-50' : 'ring-1 ring-gray-200 opacity-60'}`}
+                    onClick={() => setSelected(nodeType.id)}
+                >
+                    <img width={180} height={180} src={nodeType.imageSrc} alt="aws" />
+                    <p className="mt-3 text-center font-semibold">{nodeType.name}</p>
+                    {selected === nodeType.id && (
+                        <div className="absolute top-2 right-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                        </div>
+                    )}
+                </div>
+            ))}
+        </div>
+    )
+}
+
 function ProviderLocationSelector() {
     return (
         <div>
@@ -45,19 +76,25 @@ function ProviderLocationSelector() {
 const Steps = {
     NODE_NAME: {
         label: 'node-name',
-        next: 'PROVIDER_SELECTION',
+        next: 'NODE_TYPE',
         prev: null,
+    },
+    NODE_TYPE: {
+        label: 'node-type',
+        next: 'PROVIDER_SELECTION',
+        prev: 'NODE_NAME',
     },
     PROVIDER_SELECTION: {
         label: 'provider-selection',
         next: null,
-        prev: 'NODE_NAME',
+        prev: 'NODE_TYPE',
     },
 };
 
-function CreateNodeModal({ isOpen, onClose }) {
+function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
     const [step, setStep] = useState(Steps.NODE_NAME);
     const [name, setName] = useState('');
+    const [nodeType, setNodeType] = useState();
     const [provider, setProvider] = useState();
     
     const shouldDisableCTA = () => {
@@ -102,6 +139,17 @@ function CreateNodeModal({ isOpen, onClose }) {
                             </div>
                         </div>
                     )}
+
+                    {step.label === Steps.NODE_TYPE.label && (
+                        <div>
+                            <h3 className="text-lg text-gray-800 font-semibold flex items-center">
+                                <span className="mr-2">Which type of node would you like to deploy?</span>
+                            </h3>
+                            <div className="py-8">
+                                <NodeSelector setNodeType={setNodeType} />
+                            </div>
+                        </div>
+                    )}
                 </ModalBody>
 
                 <ModalFooter>
@@ -120,7 +168,7 @@ function CreateNodeModal({ isOpen, onClose }) {
                             mr={3}
                             colorScheme="red"
                             disabled={shouldDisableCTA()}
-                            onClick={() => setStep(Steps[step.next])}
+                            onClick={() => step.next ? setStep(Steps[step.next]) : onCreateNode(name, provider)}
                             transition="all"
                             transitionDuration={500}
                         >
