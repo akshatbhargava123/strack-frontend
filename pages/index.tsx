@@ -1,3 +1,4 @@
+import '@lib/init-firebase';
 import Head from 'next/head';
 import Home from '@components/Home';
 
