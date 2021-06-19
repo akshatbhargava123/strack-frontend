@@ -5,13 +5,7 @@ import firebase from 'firebase/app';
 import { Spinner } from '@chakra-ui/react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/dist/client/router';
-
-
-function Logo({ className }) {
-    return (
-        <span className={`p-1 text-xl font-black leading-none text-gray-900 ${className || ''}`}><span>Strack</span><span className="text-red-500">.</span></span>
-    )
-}
+import Logo from '@components/common/Logo';
 
 function ProductHeading() {
     const texts = ['Within minutes', 'Without the hassle', 'Without the knowhow'];
