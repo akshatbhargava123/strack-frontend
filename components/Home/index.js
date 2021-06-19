@@ -34,8 +34,9 @@ function Home() {
     const [user, loading, error] = useAuthState(firebase.auth());
     const [menuOpen, setMenuOpen] = useState(false);
 
+    console.log(user, loading, error);
     useEffect(() => {
-        if (user) router.replace('/dashboard');
+        if (user && !loading) router.replace('/dashboard');
     }, [user]);
 
     if (loading) {
@@ -72,8 +73,7 @@ function Home() {
                                         </a> */}
                                     </div>
                                     <div className="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0">
-                                        <a onClick={signInWithGoogle} className="w-full px-6 py-2 mr-0 text-gray-700 md:px-0 lg:pl-2 md:mr-4 lg:mr-5 md:w-auto">Sign In</a>
-                                        <a href="#_" className="inline-flex items-center w-full px-6 py-3 text-sm font-medium leading-4 text-white bg-red-500 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-red-400 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-red-500">Sign Up</a>
+                                        <a onClick={signInWithGoogle} className="cursor-pointer inline-flex items-center w-full px-6 py-3 text-sm font-medium leading-4 text-white bg-red-500 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-red-400 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-red-500">Sign In</a>
                                     </div>
                                 </div>
                             </div>
