@@ -1,5 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Typewriter from 'typewriter-effect';
+import { signInWithGoogle } from '@lib/auth';
+import firebase from 'firebase/app';
+import { Spinner } from '@chakra-ui/react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useRouter } from 'next/dist/client/router';
 
 
 function Logo({ className }) {
@@ -31,8 +36,23 @@ function ProductHeading() {
 }
 
 function Home() {
+    const router = useRouter();
+    const [user, loading, error] = useAuthState(firebase.auth());
     const [menuOpen, setMenuOpen] = useState(false);
-    
+
+    useEffect(() => {
+        if (user) router.replace('/dashboard');
+    }, [user]);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center">
+                <div className="mb-5"><Spinner size="lg" color="red" thickness={3} /></div>
+                <p>⏳ Few seconds out of your 15 min to deploy your blockchain node ⏳</p>
+            </div>
+        )
+    }
+
     return (
         <div>
             <section className="w-full px-6 pb-12 antialiased bg-white" onClick={() => setMenuOpen(false)}>
@@ -58,7 +78,7 @@ function Home() {
                                         </a> */}
                                     </div>
                                     <div className="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0">
-                                        <a className="w-full px-6 py-2 mr-0 text-gray-700 md:px-0 lg:pl-2 md:mr-4 lg:mr-5 md:w-auto">Sign In</a>
+                                        <a onClick={signInWithGoogle} className="w-full px-6 py-2 mr-0 text-gray-700 md:px-0 lg:pl-2 md:mr-4 lg:mr-5 md:w-auto">Sign In</a>
                                         <a href="#_" className="inline-flex items-center w-full px-6 py-3 text-sm font-medium leading-4 text-white bg-red-500 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-red-400 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-red-500">Sign Up</a>
                                     </div>
                                 </div>
