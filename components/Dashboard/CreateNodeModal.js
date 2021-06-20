@@ -62,12 +62,12 @@ function NodeSelector({ selected, setNodeType }) {
     )
 }
 
-function ProviderLocationSelector({ locations }) {
+function ProviderLocationSelector({ locations, setLocation }) {
     return (
         <div className="ring-1 ring-gray-600 rounded p-1">
-            <select className="outline-none">
+            <select className="outline-none" onChange={ev => setLocation(ev.target.value)}>
                 {locations.map(location => (
-                    <option key={location}>{location}</option>
+                    <option key={location} value={location}>{location}</option>
                 ))}
             </select>
         </div>
@@ -101,12 +101,14 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
     const [done, setDone] = useState(true);
     const [locations, setLocations] = useState([]);
     const [loadingLocations, setLoadingLocations] = useState(false);
+    const [location, setLocation] = useState();
     
     useEffect(() => {
         if (isOpen) setDone(false);
     }, [isOpen]);
 
     useEffect(() => {
+        setLocation(null);
         updateLocations();
     }, [provider]);
 
@@ -116,6 +118,7 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
             axios.get(`/node/location/${provider}`).then(res => {
                 const locations = res.data.data;
                 setLocations(locations);
+                setLocation(locations[0]);
             }).finally(() => {
                 setLoadingLocations(false);
             });
@@ -127,7 +130,7 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
             case Steps.NODE_NAME.label:
                 return !!!name.trim().length;
             case Steps.PROVIDER_SELECTION.label:
-               return isNaN(Number(provider));
+               return isNaN(Number(provider)) || !location;
             default:
                 return false;
         }
@@ -135,7 +138,7 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
 
     const onSubmit = () => {
         setSubmitting(true);
-        onCreateNode(name, nodeType, provider).finally(() => {
+        onCreateNode(name, nodeType, provider, location).finally(() => {
             setTimeout(() => {
                 setSubmitting(false);
 
@@ -180,15 +183,17 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
                                 <PlatformSelector selected={provider} setProvider={setProvider} />
                             </div>
 
-                            <div className="flex items-center space-x-10">
-                                <div>
-                                    <h3 className="text-lg text-gray-800 font-semibold flex items-center">
-                                        <span className="font-semibold text-black">Choose server location</span>
-                                    </h3>
-                                    <h3 className="text-sm text-gray-500">{loadingLocations ? 'fetching available locations...' : 'from these available locations'}</h3>
+                            {!isNaN(Number(provider)) && (
+                                <div className="flex items-center space-x-10 py-4">
+                                    <div>
+                                        <h3 className="text-lg text-gray-800 font-semibold flex items-center">
+                                            <span className="font-semibold text-black">Choose server location</span>
+                                        </h3>
+                                        <h3 className="text-sm text-gray-500">{loadingLocations ? 'fetching available locations...' : 'from these available with your provider'}</h3>
+                                    </div>
+                                    {!loadingLocations && <ProviderLocationSelector value={location} setLocation={setLocation} locations={locations} />}
                                 </div>
-                                {!loadingLocations && <ProviderLocationSelector locations={locations} />}
-                            </div>
+                            )}
                         </div>
                     )}
 
