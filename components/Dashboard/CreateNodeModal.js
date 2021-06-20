@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import { CloudProviders } from '@constants/cloud-providers';
 import { NodeTypes } from '@constants/node-types';
+import axios from "@lib/axios";
 
 function PlatformSelector({ selected, setProvider }) {
     return (
@@ -61,10 +62,14 @@ function NodeSelector({ selected, setNodeType }) {
     )
 }
 
-function ProviderLocationSelector() {
+function ProviderLocationSelector({ locations }) {
     return (
-        <div>
-
+        <div className="ring-1 ring-gray-600 rounded p-1">
+            <select className="outline-none">
+                {locations.map(location => (
+                    <option key={location}>{location}</option>
+                ))}
+            </select>
         </div>
     )
 }
@@ -94,10 +99,28 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
     const [provider, setProvider] = useState();
     const [submitting, setSubmitting] = useState(false);
     const [done, setDone] = useState(true);
+    const [locations, setLocations] = useState([]);
+    const [loadingLocations, setLoadingLocations] = useState(false);
     
     useEffect(() => {
         if (isOpen) setDone(false);
     }, [isOpen]);
+
+    useEffect(() => {
+        updateLocations();
+    }, [provider]);
+
+    const updateLocations = () => {
+        if (!isNaN(Number(provider))) {
+            setLoadingLocations(true);
+            axios.get(`/node/location/${provider}`).then(res => {
+                const locations = res.data.data;
+                setLocations(locations);
+            }).finally(() => {
+                setLoadingLocations(false);
+            });
+        }
+    };
 
     const shouldDisableCTA = () => {
         switch (step.label) {
@@ -155,7 +178,16 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
                             </h3>
                             <div className="py-8">
                                 <PlatformSelector selected={provider} setProvider={setProvider} />
-                                <ProviderLocationSelector />
+                            </div>
+
+                            <div className="flex items-center space-x-10">
+                                <div>
+                                    <h3 className="text-lg text-gray-800 font-semibold flex items-center">
+                                        <span className="font-semibold text-black">Choose server location</span>
+                                    </h3>
+                                    <h3 className="text-sm text-gray-500">{loadingLocations ? 'fetching available locations...' : 'from these available locations'}</h3>
+                                </div>
+                                {!loadingLocations && <ProviderLocationSelector locations={locations} />}
                             </div>
                         </div>
                     )}
