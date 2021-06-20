@@ -33,7 +33,7 @@ function NodeTable({ loading, nodes, openCreateNodeModal }) {
                             </td>
                             <td className="py-3">
                                 <div className="flex justify-center">
-                                    <img width={60} height={60} src={CloudProviders[node.datacenter].imageSrc} />
+                                    <img width={node.datacenter === 0 ? 60 : 100} src={CloudProviders[node.datacenter].imageSrc} />
                                 </div>
                             </td>
                             <td className="py-3 px-6 text-center">
