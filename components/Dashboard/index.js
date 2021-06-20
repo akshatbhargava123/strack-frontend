@@ -30,7 +30,7 @@ function Dashboard() {
     const { isOpen, onToggle } = useDisclosure();
     const [user, authLoading, error] = useAuthState(firebase.auth());
     const [nodes, setNodes] = useState([]);
-    const [nodesLoading, setNodesLoading] = useState(false);
+    const [nodesLoading, setNodesLoading] = useState(true);
 
     useEffect(() => {
         if (user) fetchNodes();
@@ -38,7 +38,7 @@ function Dashboard() {
 
     const fetchNodes = () => {
         setNodesLoading(true);
-        axios.get('/node').then(res => {
+        return axios.get('/node').then(res => {
             const nodes = res.data.data;
             console.log(nodes);
 
@@ -55,7 +55,7 @@ function Dashboard() {
             type: nodeType,
             datacenter: provider,
             location,
-        });
+        }).then(fetchNodes);
     };
 
     return (
@@ -79,7 +79,7 @@ function Dashboard() {
                             <p className="text-gray-500">Fetching your nodes</p>
                         </div>
                     ) : (
-                        <NodeTable nodes={nodes} openCreateNodeModal={onToggle} />
+                        <NodeTable loading={nodesLoading} nodes={nodes} openCreateNodeModal={onToggle} />
                     )}
                 </div>
             </div>
