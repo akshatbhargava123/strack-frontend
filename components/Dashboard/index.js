@@ -45,7 +45,7 @@ function Dashboard() {
             setTimeout(() => {
                 setNodes(nodes);
                 setNodesLoading(false);
-            }, 1000);
+            }, 200);
         });
     };
     

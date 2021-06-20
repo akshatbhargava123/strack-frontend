@@ -148,7 +148,7 @@ function CreateNodeModal({ isOpen, onClose, onCreateNode }) {
                 setNodeType();
                 setProvider();
                 setDone(true);
-            }, 1500);
+            }, 200);
 
         });
     };
