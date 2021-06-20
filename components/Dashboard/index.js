@@ -1,4 +1,4 @@
-import { Spinner, useDisclosure } from '@chakra-ui/react';
+import { Spinner, useDisclosure, useToast } from '@chakra-ui/react';
 import Logo from '@components/common/Logo';
 import { noop } from 'lodash';
 import { useEffect, useState } from 'react';
@@ -27,6 +27,7 @@ function Header({ user, loading }) {
 }
 
 function Dashboard() {
+    const toast = useToast({ duration: 2000, position: 'top-right' });
     const { isOpen, onToggle } = useDisclosure();
     const [user, authLoading, error] = useAuthState(firebase.auth());
     const [nodes, setNodes] = useState([]);
@@ -58,6 +59,13 @@ function Dashboard() {
         }).then(fetchNodes);
     };
 
+    const onDelete = (nodeId) => {
+        return axios.delete(`/node/${nodeId}`).then(() => {
+            toast({ title: 'Node deleted successfully' });
+            setTimeout(() => fetchNodes(), 100);
+        });
+    };
+
     return (
         <div>
             <Header user={user} loading={authLoading} />
@@ -79,7 +87,7 @@ function Dashboard() {
                             <p className="text-gray-500">Fetching your nodes</p>
                         </div>
                     ) : (
-                        <NodeTable loading={nodesLoading} nodes={nodes} openCreateNodeModal={onToggle} />
+                        <NodeTable loading={nodesLoading} nodes={nodes} onDelete={onDelete} openCreateNodeModal={onToggle} />
                     )}
                 </div>
             </div>

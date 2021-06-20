@@ -1,8 +1,69 @@
-import { Tooltip } from '@chakra-ui/react';
+import {
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton,
+    ButtonGroup,
+    Button,
+    useDisclosure,
+    Tooltip,
+  } from "@chakra-ui/react"
 import { CloudProviders } from "@constants/cloud-providers";
 import { NodeTypes } from "@constants/node-types";
+import { useState } from "react";
 
-function NodeTable({ loading, nodes, openCreateNodeModal }) {
+function ConfirmDeletePopover({ onDelete }) {
+    const [deleting, setDeleting] = useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const onConfirm = () => {
+        setDeleting(true);
+        onDelete().then(() => {
+            onClose();
+            setDeleting(false);
+        });
+    };
+
+    return (
+        <Popover
+            placement="bottom"
+            isOpen={isOpen}
+            onClose={onClose}
+        >
+            <PopoverTrigger>
+                <div onClick={onOpen}>
+                    <Tooltip hasArrow label="Delete Node">
+                        <div className="w-4 mr-2 transform hover:text-red-500 hover:scale-110 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </div>
+                    </Tooltip>
+                </div>
+            </PopoverTrigger>
+            <PopoverContent outline="none" border="none" _focus={{ outline: 'none', border: 'none' }}>
+                <PopoverHeader fontWeight="extrabold">Irreversible action</PopoverHeader>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverBody>
+                    <span className="text-gray-700">Are you sure you want to delete this node?</span>
+                </PopoverBody>
+                <PopoverFooter d="flex" justifyContent="flex-end">
+                    <ButtonGroup size="sm">
+                        <Button disabled={deleting} variant="outline" onClick={onClose}>No, cancel</Button>
+                        <Button disabled={deleting} colorScheme="red" onClick={onConfirm}>Yes, delete</Button>
+                    </ButtonGroup>
+                </PopoverFooter>
+            </PopoverContent>
+        </Popover>
+    )
+}
+
+function NodeTable({ loading, nodes, onDelete, openCreateNodeModal }) {
     return (
         <div className="bg-white shadow-md rounded my-6">
             <table className="w-full table-auto">
@@ -48,13 +109,14 @@ function NodeTable({ loading, nodes, openCreateNodeModal }) {
                                             </svg>
                                         </div>
                                     </Tooltip>
-                                    <Tooltip hasArrow label="Delete Node">
+                                    {/* <Tooltip hasArrow label="Delete Node">
                                         <div className="w-4 mr-2 transform hover:text-red-500 hover:scale-110 cursor-pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg>
                                         </div>
-                                    </Tooltip>
+                                    </Tooltip> */}
+                                    <ConfirmDeletePopover onDelete={() => onDelete(node._id)} />
                                 </div>
                             </td>
                         </tr>
