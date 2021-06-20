@@ -79,7 +79,7 @@ function Dashboard() {
                             <p className="text-gray-500">Fetching your nodes</p>
                         </div>
                     ) : (
-                        <NodeTable nodes={nodes} />
+                        <NodeTable nodes={nodes} openCreateNodeModal={onToggle} />
                     )}
                 </div>
             </div>

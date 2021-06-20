@@ -2,7 +2,7 @@ import { Tooltip } from '@chakra-ui/react';
 import { CloudProviders } from "@constants/cloud-providers";
 import { NodeTypes } from "@constants/node-types";
 
-function NodeTable({ nodes }) {
+function NodeTable({ nodes, openCreateNodeModal }) {
     return (
         <div className="bg-white shadow-md rounded my-6">
             <table className="w-full table-auto">
@@ -26,7 +26,7 @@ function NodeTable({ nodes }) {
                             <td className="py-3 px-6 text-left">
                                 <div className="flex items-center">
                                     <div className="mr-2">
-                                        <img className="w-6 h-6 rounded-full" src={NodeTypes[node.type].imageSrc} />
+                                        <img className="w-6 h-6" src={NodeTypes[node.type].imageSrc} />
                                     </div>
                                     <span>{NodeTypes[node.type].name}</span>
                                 </div>
@@ -61,6 +61,13 @@ function NodeTable({ nodes }) {
                     ))}
                 </tbody>
             </table>
+            {!nodes.length && (
+                <div className="p-8 flex flex-col items-center justify-center">
+                    <img src="/images/get-started.svg" alt="Get started" />
+                    <p className="py-5 text-gray-500 text-sm">This area is as empty as Mars and was just waiting for you to deploy your node!</p>
+                    <button onClick={openCreateNodeModal} className="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold">Deploy node</button>
+                </div>
+            )}
         </div>
     )
 }
