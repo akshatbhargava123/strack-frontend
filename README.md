@@ -52,10 +52,3 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 ![image](https://user-images.githubusercontent.com/22184427/122774493-da22bf80-d2c6-11eb-80bf-a6ca330f269f.png)
 
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
