@@ -45,7 +45,7 @@ function ConfirmDeletePopover({ onDelete }) {
                     </Tooltip>
                 </div>
             </PopoverTrigger>
-            <PopoverContent outline="none" border="none" _focus={{ outline: 'none', border: 'none' }}>
+            <PopoverContent shadow="lg" outline="none" border="none" _focus={{ outline: 'none', border: 'none' }}>
                 <PopoverHeader fontWeight="extrabold">Irreversible action</PopoverHeader>
                 <PopoverArrow />
                 <PopoverCloseButton />
@@ -58,6 +58,41 @@ function ConfirmDeletePopover({ onDelete }) {
                         <Button disabled={deleting} colorScheme="red" onClick={onConfirm}>Yes, delete</Button>
                     </ButtonGroup>
                 </PopoverFooter>
+            </PopoverContent>
+        </Popover>
+    )
+}
+
+function AgentConfigPopover({ node }) {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    return (
+        <Popover
+            placement="bottom"
+            isOpen={isOpen}
+            onClose={onClose}
+        >
+            <PopoverTrigger>
+                <div onClick={onOpen}>
+                    <Tooltip hasArrow label="Syntropy Agent Config">
+                        <div className="w-4 mr-2 transform hover:text-green-500 hover:scale-110 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                            </svg>
+                        </div>
+                    </Tooltip>
+                </div>
+            </PopoverTrigger>
+            <PopoverContent shadow="lg" outline="none" border="none" _focus={{ outline: 'none', border: 'none' }}>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverBody>
+                    <div className="text-gray-700">
+                        <h3 className="font-semibold text-lg">Syntropy Agent Configuration</h3>
+                        <p className="text-left mt-2 text-sm"><b>agent_name:</b> {node.agent_name}</p>
+                        <p className="text-left mt-2 text-sm"><b>agent_token:</b> {node.agent_token}</p>
+                    </div>
+                </PopoverBody>
             </PopoverContent>
         </Popover>
     )
@@ -109,13 +144,7 @@ function NodeTable({ loading, nodes, onDelete, openCreateNodeModal }) {
                                             </svg>
                                         </div>
                                     </Tooltip>
-                                    {/* <Tooltip hasArrow label="Delete Node">
-                                        <div className="w-4 mr-2 transform hover:text-red-500 hover:scale-110 cursor-pointer">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                        </div>
-                                    </Tooltip> */}
+                                    <AgentConfigPopover node={node} />
                                     <ConfirmDeletePopover onDelete={() => onDelete(node._id)} />
                                 </div>
                             </td>
