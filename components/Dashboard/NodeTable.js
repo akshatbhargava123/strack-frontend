@@ -11,6 +11,7 @@ import {
     Button,
     useDisclosure,
     Tooltip,
+    useToast,
   } from "@chakra-ui/react"
 import { CloudProviders } from "@constants/cloud-providers";
 import { NodeTypes } from "@constants/node-types";
@@ -64,7 +65,18 @@ function ConfirmDeletePopover({ onDelete }) {
 }
 
 function AgentConfigPopover({ node }) {
+    const toast = useToast({ position: 'top-right', duration: 4000 });
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [networkCreationLoading, setNetworkCreationLoading] = useState(false);
+
+    const onAgentDeployed = () => {
+        setNetworkCreationLoading(true);
+        setTimeout(() => {
+            onClose();
+            toast({ title: 'Network has been created', status: 'success' });
+            setNetworkCreationLoading(false);
+        }, 1500);
+    };
 
     return (
         <Popover
@@ -92,6 +104,11 @@ function AgentConfigPopover({ node }) {
                         <p className="text-left mt-2 text-sm"><b>agent_name:</b> {node.agent_name}</p>
                         <p className="text-left mt-2 text-sm"><b>agent_token:</b> {node.agent_token}</p>
                     </div>
+                    <Button mt={5} colorScheme="red" variant="ghost" size="sm" onClick={onAgentDeployed} isLoading={networkCreationLoading}>
+                        <Tooltip placement="top" hasArrow label="Create network if you've deployed the agent">
+                            Agent deployed, Create Network
+                        </Tooltip>
+                    </Button>
                 </PopoverBody>
             </PopoverContent>
         </Popover>
