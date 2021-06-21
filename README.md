@@ -1,4 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Strack
+Strack is a Blockchain-as-a-Service product, where users and businesses can easily deploy blockchain nodes on any cloud provider, any location. We want the blockchain space to become secure-by-default and expand the node-runner audience to people without the technical knowledge.
+
+[Jump to tutorial](#tutorial)
 
 ## Getting Started
 
@@ -25,10 +28,33 @@ To learn more about Next.js, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Tutorial
 
-## Deploy on Vercel
+- When you land on [https://strackstack.vercel.app/](https://strackstack.vercel.app/), the landing page introduces you to the platform
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![image](https://user-images.githubusercontent.com/22184427/122772806-5e744300-d2c5-11eb-9c45-96a7e045930a.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+- After logging in, you'll see your dashboard where you can create/manage your nodes
+
+![image](https://user-images.githubusercontent.com/22184427/122772942-84014c80-d2c5-11eb-8b18-b7be47a44c13.png)
+
+
+- Node creation process takes 3 steps as follows:
+
+![image](https://user-images.githubusercontent.com/22184427/122773641-23beda80-d2c6-11eb-8ada-492eb5cfcac8.png)
+![image](https://user-images.githubusercontent.com/22184427/122773677-2ae5e880-d2c6-11eb-8b4b-aa221d7d5d9c.png)
+![image](https://user-images.githubusercontent.com/22184427/122773704-320cf680-d2c6-11eb-8078-a920462515c0.png)
+![image](https://user-images.githubusercontent.com/22184427/122773732-36d1aa80-d2c6-11eb-9a64-15c31f85551b.png)
+
+
+- After you've successfully created your first node, you'll start seeing it on the dashboard:
+
+![image](https://user-images.githubusercontent.com/22184427/122773207-c4f96100-d2c5-11eb-83a3-f1c1192ad261.png)
+
+
+- You can get your syntropy agent config from actions tab, once you deploy the agent, click on "Create Network" button to create your network in seconds:
+
+![image](https://user-images.githubusercontent.com/22184427/122774034-7bf5dc80-d2c6-11eb-86ac-3a60cc562dda.png)
+
+![image](https://user-images.githubusercontent.com/22184427/122774493-da22bf80-d2c6-11eb-80bf-a6ca330f269f.png)
