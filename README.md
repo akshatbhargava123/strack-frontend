@@ -1,5 +1,6 @@
 ## Strack
 Strack is a Blockchain-as-a-Service product, where users and businesses can easily deploy blockchain nodes on any cloud provider, any location. We want the blockchain space to become secure-by-default and expand the node-runner audience to people without the technical knowledge.
+[Demo Video here](https://www.youtube.com/watch?v=3ofvegNF3Es)
 
 
 ## Tutorial
@@ -33,6 +34,9 @@ Strack is a Blockchain-as-a-Service product, where users and businesses can easi
 
 ![image](https://user-images.githubusercontent.com/22184427/122774493-da22bf80-d2c6-11eb-80bf-a6ca330f269f.png)
 
+## Supporting Backend and Infra-as-Code Repos:
+- https://github.com/Zygimantass/strack-backend
+- https://github.com/Paulius0112/strack-automation
 
 ## How to run or develop further?
 
