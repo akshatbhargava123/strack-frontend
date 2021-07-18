@@ -2,6 +2,7 @@
 Strack is a Blockchain-as-a-Service product, where users and businesses can easily deploy blockchain nodes on any cloud provider, any location. We want the blockchain space to become secure-by-default and expand the node-runner audience to people without the technical knowledge.
 [Demo Video here](https://www.youtube.com/watch?v=3ofvegNF3Es)
 
+This project was bootstrapped as a hackathon project built at [SyntropyHackathon](https://www.syntropystack.com/hackathon), we also got a second place in the hackathon. Read more about it [here](https://medium.com/syntropynet/recap-of-the-deweb-virtual-hackathon-2021-3b8ae4d2c313) :)
 
 ## Tutorial
 
